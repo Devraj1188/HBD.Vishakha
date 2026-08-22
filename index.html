@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Birthday celebration website for my best friend. Created with love, interactive elements, and memory highlights.">
+    <title>Happy Birthday, Vishaka! ✨</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Outfit:wght@300;400;600;800&family=Sacramento&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Dynamic Particle Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Fireworks Canvas Overlay (on top of content, pointer-events none) -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Custom Preloader / Welcome Screen -->
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="heart-portal">
+                <div class="heart-pulse"></div>
+                <div class="sparkles-ring"></div>
+            </div>
+            <h2 class="loader-title">Unlocking a special day...</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="loader-status" id="loaderStatus">Loading precious memories...</p>
+            <button id="enterBtn" class="enter-btn disabled" disabled>Enter the Magic</button>
+        </div>
+    </div>
+
+    <!-- Floating Custom Music Player -->
+    <div class="music-player-container" id="musicPlayer">
+        <button class="music-toggle-btn" id="musicToggle" aria-label="Toggle Music">
+            <span class="music-icon play-icon">🎵</span>
+        </button>
+        <div class="music-details">
+            <span class="music-title">Special Song For You Vishaka My BF!</span>
+            <div class="sound-wave" id="soundWave">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Control Panel (Balloon Popping & Game Info) -->
+    <div class="game-control-panel">
+        <button id="balloonGameToggle" class="control-btn" title="Toggle Floating Balloons">
+            🎈 <span class="badge" id="balloonCount">0</span>
+        </button>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main id="mainContent" class="hidden">
+
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="logo">To My Bestie Vishu</div>
+            <nav class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#timeline">Journey</a>
+                <a href="#gallery">Memories</a>
+                <a href="#surprise">Surprise</a>
+                <a href="#letter">Wishes</a>
+            </nav>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menu">☰</button>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <h3 class="hero-subtitle animate-text">HAPPY BIRTHDAY</h3>
+                <h1 class="hero-title animate-text-delay" id="heroTitle"></h1>
+                <p class="hero-description animate-text-delay2">
+                    Today is all about you! Scroll down to unlock a journey filled with our favorite moments, beautiful
+                    memories, and a special letter written just for you.
+                </p>
+
+                <!-- Beautiful Birthday Countdown -->
+                <div class="countdown-container">
+                    <h4 class="countdown-header">Crowning another beautiful year</h4>
+                    <div class="countdown-timer" id="countdown">
+                        <div class="time-block">
+                            <span id="days" class="time-num">00</span>
+                            <span class="time-label">Days</span>
+                        </div>
+                        <div class="time-block">
+                            <span id="hours" class="time-num">00</span>
+                            <span class="time-label">Hours</span>
+                        </div>
+                        <div class="time-block">
+                            <span id="minutes" class="time-num">00</span>
+                            <span class="time-label">Mins</span>
+                        </div>
+                        <div class="time-block">
+                            <span id="seconds" class="time-num">00</span>
+                            <span class="time-label">Secs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <a href="#timeline" class="cta-primary">Begin the Journey ↓</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-portrait-slideshow" id="heroSlideshow">
+                    <div class="slideshow-frame">
+                        <div class="glow-orb"></div>
+                        <div class="slide active">
+                            <img src="assets/IMG-20260304-WA0002.jpg" alt="Friendship Memories">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/IMG-20260413-WA0007(1).jpg" alt="Golden Days">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/IMG-20260429-WA0042.jpg" alt="Birthday Magic">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/IMG-20260512-WA0058.jpg" alt="More Memories">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/IMG-20260302-WA0033.jpg" alt="Birthday Magic">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/IMG-20260414-WA0020.jpg" alt="More Memories">
+                        </div>
+
+                        <div class="slide">
+                            <img src="assets/IMG-20260417-WA0011.jpg" alt="More Memories">
+                        </div>
+
+                        <div class="slide">
+                            <img src="assets/IMG-20260413-WA0005.jpg" alt="More Memories">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section (Our Journey) -->
+        <section id="timeline" class="timeline-section">
+            <div class="section-header">
+                <span class="section-tag">Our Friendship</span>
+                <h2 class="section-title">The Story of Us</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="timeline-container">
+                <!-- Timeline Line -->
+                <div class="timeline-line"></div>
+
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item left-item reveal-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">How We Met</span>
+                        <h3>The Beginning of Forever</h3>
+                        <p>It started with a simple hello, a shared laugh, and in that single moment, we clicked. Who
+                            would have guessed that simple interaction would blossom into the greatest friendship in the
+                            world?</p>
+                        <div class="card-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item right-item reveal-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">Countless Adventures</span>
+                        <h3>Partner in Crime</h3>
+                        <p>From late-night gossiping, spontaneous road trips, inside jokes that make zero sense to
+                            anyone else, to just being there in silence—every second with you is a memory I treasure
+                            forever.</p>
+                        <div class="card-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item left-item reveal-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">Unshakable Support</span>
+                        <h3>My Safe Haven</h3>
+                        <p>Through every high and low, you've been my constant anchor. Thank you for listening without
+                            judgment, laughing with me when I'm happy, and wiping my tears when I'm sad.</p>
+                        <div class="card-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= MEMORY REEL (Video Section) ======= -->
+        <section id="memory-reel" class="video-section">
+            <div class="section-header">
+                <span class="section-tag">Our Story</span>
+                <h2 class="section-title">Memory Reel</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="video-container reveal-on-scroll">
+                <div class="video-wrapper">
+                    <video id="memoryVideo" class="memory-video"
+                        poster="assets/file_0000000064f87208be0620a68ac0300d.png">
+                        <source src="assets/best_friend_vedio.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay" id="videoOverlay">
+                        <button class="play-video-btn" id="playVideoBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="video-glow"></div>
+            </div>
+        </section>
+
+        <!-- Animated Photo Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <div class="section-header">
+                <span class="section-tag">Captured Moments</span>
+                <h2 class="section-title">A Gallery of Us</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Photo Card 1 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/file_00000000de0c7208ab18e3b95a8e876f.png" alt="Laughter & Joys">
+                    </div>
+                    <div class="photo-info">
+                        <h3>Joyful Memories</h3>
+                        <p>Pure laughter, endless gossip, and good times.</p>
+                    </div>
+                </div>
+
+                <!-- Photo Card 2 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/IMG-20260709-WA0025.jpg" alt="Aesthetic Friendship Illustration">
+                    </div>
+                    <div class="photo-info">
+                        <h3>Soul Bond 🤍</h3>
+                        <p>"Through every high and every low, one thing never changes—your hand is always there when I
+                            need it most. Forever grateful for a friendship like yours. ❤️🤍"</p>
+                    </div>
+                </div>
+
+                <!-- Photo Card 3 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/IMG-20260709-WA0032.jpg" alt="Side by Side">
+                    </div>
+                    <div class="photo-info">
+                        <h3>Side by Side</h3>
+                        <p>No matter where life takes us, we stand together.</p>
+                    </div>
+                </div>
+
+                <!-- Photo Card 4 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/file_0000000027f47208b393513159525acc.png" alt="A magical glowing gift box">
+                    </div>
+                    <div class="photo-info">
+                        <h3>The Perfect Frame</h3>
+                        <p>Some moments deserve to be remembered forever.</p>
+                    </div>
+                </div>
+
+                <!-- Photo Card 5 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/IMG-20260709-WA0034.jpg" alt="Balloons at Sunset">
+                    </div>
+                    <div class="photo-info">
+                        <h3>Core Memory</h3>
+                        <p>The comfort of a true friend is unmatched.</p>
+                    </div>
+                </div>
+
+                <!-- Photo Card 6 -->
+                <div class="photo-card reveal-on-scroll" data-tilt>
+                    <div class="card-image-wrapper">
+                        <img src="assets/both.jpeg" alt="Sparkler Candle Cake">
+                    </div>
+                    <div class="photo-info">
+                        <h3>Make A Wish</h3>
+                        <p>May all your deepest dreams and hopes come true.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Wishes Envelope / Letter Section -->
+        <section id="letter" class="letter-section">
+            <div class="section-header">
+                <span class="section-tag">From My Heart</span>
+                <h2 class="section-title">A Special Letter</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="envelope-wrapper reveal-on-scroll">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-paper" id="envelopePaper">
+                        <div class="letter-content-inner">
+                            <div class="letter-ornament-top">✦ ─── ✧ ─── ✦</div>
+                            <span class="letter-date" id="currentDateText">August 23, 2026</span>
+                            <h2 class="letter-salutation">My Dearest Vishaka,</h2>
+                            <p class="letter-body">
+                                Happy Birthday! 🎂✨<br><br>
+                                Words will never be enough to express how much you mean to me. In a world that is
+                                constantly changing, you have been my constant source of joy, laughter, and comfort.
+                                You're not just my best friend, you are my family.
+                                <br><br>
+                                Thank you for all the beautiful memories we've shared, the stupid arguments we
+                                immediately laughed off, and the silent understanding we share. I am so incredibly proud
+                                of the person you are, and I can't wait to see you conquer all your dreams in the years
+                                ahead.
+                                <br><br>
+                                Always remember that whatever happens, I am right here by your side, cheering you on.
+                                May this birthday bring you as much happiness as you bring to everyone around you!
+                            </p>
+                            <div class="letter-divider">─── ♡ ───</div>
+                            <span class="letter-signature">With infinite love,<br>Your Best Friend ❤️</span>
+                        </div>
+                    </div>
+                    <div class="envelope-front"></div>
+                    <div class="envelope-top" id="envelopeTop"></div>
+                    <div class="envelope-seal" id="envelopeSeal">❤️</div>
+                </div>
+                <p class="envelope-hint">Click the heart seal to open the letter ✨</p>
+            </div>
+        </section>
+
+        <!-- ======= SURPRISE ZONE ======= -->
+        <section id="surprise" class="surprise-zone">
+            <div class="section-header">
+                <span class="section-tag">Surprise Zone 🎁</span>
+                <h2 class="section-title">Unwrap Your Surprises</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="surprise-grid">
+
+                <!-- 0. Secret Voice Note -->
+                <div class="surprise-card voice-note-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">🎙️ Secret Voice Note</h3>
+                    <p class="surprise-card-desc">A special message just for you.</p>
+                    <div class="card-content-wrapper">
+                        <div class="voice-player">
+                            <button class="voice-play-btn" id="voicePlayBtn">
+                                <i class="fas fa-play" id="voicePlayIcon"></i>
+                            </button>
+                            <div class="voice-wave" id="voiceWave">
+                                <span class="bar"></span><span class="bar"></span><span class="bar"></span><span
+                                    class="bar"></span><span class="bar"></span>
+                            </div>
+                            <audio id="secretVoiceNote" src="assets/For_You.aac"></audio>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. 3D Animated Gift Box -->
+                <div class="surprise-card gift-box-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">🎁 Open Your Gift</h3>
+                    <p class="surprise-card-desc">Tap the gift box to unwrap a special surprise!</p>
+                    <div class="card-content-wrapper">
+                        <div class="gift-box-scene">
+                            <div class="gift-box" id="giftBox">
+                                <div class="gift-lid" id="giftLid">
+                                    <div class="gift-lid-front"></div>
+                                    <div class="gift-lid-top"></div>
+                                    <div class="gift-lid-left"></div>
+                                    <div class="gift-lid-right"></div>
+                                    <div class="gift-bow">🎀</div>
+                                </div>
+                                <div class="gift-base">
+                                    <div class="gift-base-front"></div>
+                                    <div class="gift-base-back"></div>
+                                    <div class="gift-base-left"></div>
+                                    <div class="gift-base-right"></div>
+                                    <div class="gift-base-bottom"></div>
+                                </div>
+                            </div>
+                            <!-- Hidden surprise message revealed after open -->
+                            <div class="gift-reveal" id="giftReveal">
+                                <img src="assets/surprise_reveal.png" alt="Surprise!" class="gift-reveal-img">
+                                <p class="gift-reveal-text">You are the greatest gift life ever gave me! 🌟💖</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Scratch Card -->
+                <div class="surprise-card scratch-card-wrapper reveal-on-scroll">
+                    <h3 class="surprise-card-title">🃏 Scratch to Reveal</h3>
+                    <p class="surprise-card-desc">Scratch the card to discover your birthday compliment!</p>
+                    <div class="card-content-wrapper">
+                        <div class="scratch-card" id="scratchCard">
+                            <canvas id="scratchCanvas" width="340" height="200"></canvas>
+                            <div class="scratch-hidden-text" id="scratchHidden">
+                                <span class="scratch-emoji">🌟</span>
+                                <p>You are the most beautiful soul I know — inside & out! Never change! 💕</p>
+                            </div>
+                        </div>
+                        <p class="scratch-hint">Use your mouse or finger to scratch ↑</p>
+                    </div>
+                </div>
+
+                <!-- 3. Birthday Wish Wheel Spinner -->
+                <div class="surprise-card wheel-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">🎡 Spin the Wish Wheel</h3>
+                    <p class="surprise-card-desc">Spin to receive a magical birthday wish!</p>
+                    <div class="card-content-wrapper">
+                        <div class="wheel-container">
+                            <div class="wheel-pointer">▼</div>
+                            <canvas id="wheelCanvas" width="300" height="300"></canvas>
+                        </div>
+                        <button class="spin-btn" id="spinBtn">SPIN! 🎰</button>
+                        <div class="wheel-result" id="wheelResult"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Magic 8 Ball -->
+                <div class="surprise-card magic-ball-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">🔮 Magic Friendship Ball</h3>
+                    <p class="surprise-card-desc">Click the magic ball to see what the future holds for us!</p>
+                    <div class="card-content-wrapper">
+                        <div class="magic-ball" id="magicBall">
+                            <div class="ball-outer">
+                                <div class="ball-inner">
+                                    <div class="ball-triangle" id="ballTriangle">
+                                        <span id="magicAnswer">Click Me!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Typing Surprise Message -->
+                <div class="surprise-card typing-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">⌨️ Secret Message</h3>
+                    <p class="surprise-card-desc">Click to decode a special birthday message just for you!</p>
+                    <div class="card-content-wrapper">
+                        <div class="typing-container" id="typingContainer">
+                            <div class="typing-screen" id="typingScreen">
+                                <span id="typingText">Waiting for command...</span><span
+                                    class="typewriter-cursor">|</span>
+                            </div>
+                            <button class="magic-btn btn" id="startTypingBtn">Decode</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Animated Flower Bouquet -->
+                <div class="surprise-card bouquet-card reveal-on-scroll">
+                    <h3 class="surprise-card-title">💐 Flower Bouquet</h3>
+                    <p class="surprise-card-desc">A special animated flower bouquet just for you!</p>
+                    <div class="card-content-wrapper">
+                        <button class="magic-btn btn" id="openBouquetBtn">Open Bouquet</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sparkles & Confetti Interactive Panel -->
+        <section class="interactive-sandbox">
+            <div class="sandbox-content reveal-on-scroll">
+                <h2>🎆 Light Up the Sky!</h2>
+                <p>Click anywhere to launch glowing sparkles, trigger balloons, or launch a full fireworks show!</p>
+                <div class="sandbox-buttons">
+                    <button class="sandbox-btn" id="spawnBalloonBtn">Release Birthday Balloons 🎈</button>
+                    <button class="sandbox-btn" id="confettiCannonBtn">Trigger Confetti Cannon 🎉</button>
+                    <button class="sandbox-btn fireworks-btn" id="fireworksBtn">Launch Fireworks 🎆</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Lightbox for Gallery -->
+        <div class="lightbox-overlay" id="lightbox">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Zoomed memory">
+            <div class="lightbox-caption" id="lightboxCaption">Caption text</div>
+        </div>
+
+        <!-- Audio Elements -->
+        <!-- User requested a friendship song. Using a lovely upbeat acoustic royalty-free track -->
+        <audio id="bgMusic" src="assets/Happy Birthday vishakha.mp3" loop></audio>
+        <audio id="popSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" preload="auto"></audio>
+
+        <!-- Flower Bouquet Modal -->
+        <div class="bouquet-modal" id="bouquetModal">
+            <div class="bouquet-modal-content">
+                <button class="bouquet-close-btn" id="bouquetCloseBtn">&times;</button>
+                <div class="bouquet-wrapper" id="bouquetWrapper">
+                    <!-- Magic Sparkles -->
+                    <div class="sparkle s1">✨</div>
+                    <div class="sparkle s2">✨</div>
+                    <div class="sparkle s3">✨</div>
+
+                    <!-- Bouquet Paper/Cone -->
+                    <div class="bouquet-cone"></div>
+
+                    <!-- Dense Flowers Fan -->
+                    <!-- Back Layer -->
+                    <div class="flower layer1 f-1">🌺</div>
+                    <div class="flower layer1 f-2">🌻</div>
+                    <div class="flower layer1 f-3">🌺</div>
+                    <div class="flower layer1 f-4">🌻</div>
+
+                    <!-- Middle Layer -->
+                    <div class="flower layer2 f-5">🌸</div>
+                    <div class="flower layer2 f-6">🌹</div>
+                    <div class="flower layer2 f-7">🌷</div>
+                    <div class="flower layer2 f-8">🌹</div>
+                    <div class="flower layer2 f-9">🌸</div>
+
+                    <!-- Front Layer -->
+                    <div class="flower layer3 f-10">🌷</div>
+                    <div class="flower layer3 f-11">🌼</div>
+                    <div class="flower layer3 f-12">🌹</div>
+                    <div class="flower layer3 f-13">🌼</div>
+                    <div class="flower layer3 f-14">🌷</div>
+
+                    <!-- Centerpiece -->
+                    <div class="flower centerpiece f-15">💖</div>
+
+                    <!-- Bow -->
+                    <div class="bouquet-bow">🎀</div>
+                </div>
+                <h2 class="bouquet-text">Happy Birthday Vishakha<br><span>my best friend</span></h2>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Made with ❤️ in 2026 for Vishaka, the best friend ever.</p>
+        </footer>
+    </main>
+
+    <!-- Core Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
